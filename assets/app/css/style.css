@@ -1,0 +1,209 @@
+body {
+  --primary-bg: rgb(234, 234, 234);
+  --primary-text: rgb(14, 28, 54);
+}
+
+body[theme=dark] {
+  --primary-bg: rgb(14, 28, 54);
+  --primary-text: rgb(234, 234, 234);
+}
+
+.toggle-theme .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.toggle-theme .switch {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: linear-gradient(0deg, #87ceeb 0%, #e0f6ff 100%);
+  border-radius: 75px;
+  cursor: pointer;
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border: 2px solid var(--bs-border-color);
+}
+.toggle-theme .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-theme .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 1s;
+}
+.toggle-theme .sun,
+.toggle-theme .moon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  top: 3px;
+  transition: 1s;
+}
+.toggle-theme .sun {
+  background: radial-gradient(circle, #ffd700 30%, #ffa500 70%);
+  left: 2.5px;
+  box-shadow: 0 0 20px #ffd700;
+  transform: scale(1);
+}
+.toggle-theme .moon {
+  background: radial-gradient(circle, #f4f4f4 30%, #e0e0e0 70%);
+  right: -12px;
+  box-shadow: 0 0 20px #f4f4f4;
+  transform: scale(0);
+}
+.toggle-theme .cloud {
+  background-color: white;
+  border-radius: 50px;
+  position: absolute;
+  transition: 1s;
+}
+.toggle-theme .cloud::before,
+.toggle-theme .cloud::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+}
+.toggle-theme .cloud1 {
+  width: 18px;
+  height: 4px;
+  top: 8px;
+  left: 28px;
+}
+.toggle-theme .cloud1::before {
+  width: 9px;
+  height: 8px;
+  top: -5px;
+  left: 2px;
+}
+.toggle-theme .cloud1::after {
+  width: 8px;
+  height: 8px;
+  top: -4px;
+  right: 2.5px;
+}
+.toggle-theme .cloud2 {
+  width: 13px;
+  height: 5px;
+  top: 16px;
+  left: 37px;
+}
+.toggle-theme .cloud2::before {
+  width: 7px;
+  height: 8px;
+  top: -3px;
+  left: 0.5px;
+}
+.toggle-theme .cloud2::after {
+  width: 5px;
+  height: 5px;
+  top: -2px;
+  right: 2px;
+}
+.toggle-theme .star {
+  position: absolute;
+  background-color: white;
+  -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+          clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  opacity: 0;
+  transition: 1s;
+}
+.toggle-theme .star1 {
+  width: 4px;
+  height: 4px;
+  top: 7px;
+  left: 8px;
+}
+.toggle-theme .star2 {
+  width: 3px;
+  height: 3px;
+  top: 12px;
+  left: 14px;
+}
+.toggle-theme .star3 {
+  width: 2px;
+  height: 2px;
+  top: 18px;
+  left: 12px;
+}
+.toggle-theme .star4 {
+  width: 2.4px;
+  height: 2.4px;
+  top: 8px;
+  left: 18px;
+}
+.toggle-theme .star5 {
+  width: 1.6px;
+  height: 1.6px;
+  top: 15px;
+  left: 20px;
+}
+.toggle-theme input:checked + .slider {
+  background: linear-gradient(0deg, #1a1a2e 0%, #16213e 100%);
+}
+.toggle-theme input:checked + .slider .sun {
+  left: -12px;
+  transform: scale(0);
+}
+.toggle-theme input:checked + .slider .moon {
+  right: 2.5px;
+  transform: scale(1);
+}
+.toggle-theme input:checked + .slider .cloud {
+  transform: translateX(30px) scale(0);
+}
+.toggle-theme input:checked + .slider .star {
+  opacity: 1;
+  transform: scale(1.5);
+}
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+.toggle-theme input:checked + .slider .star {
+  animation: twinkle 2s infinite;
+}
+.toggle-theme input:checked + .slider .star1 {
+  animation-delay: 0s;
+}
+.toggle-theme input:checked + .slider .star2 {
+  animation-delay: 0.4s;
+}
+.toggle-theme input:checked + .slider .star3 {
+  animation-delay: 0.8s;
+}
+.toggle-theme input:checked + .slider .star4 {
+  animation-delay: 1.2s;
+}
+.toggle-theme input:checked + .slider .star5 {
+  animation-delay: 1.6s;
+}
+
+#sidebar-menu--left {
+  min-height: 100dvh;
+  border-right: 0.5px solid var(--bs-border-color);
+}
+
+.border-right {
+  border-right: 1px solid var(--bs-border-color);
+}
+
+.graph {
+  width: 100%;
+}
+.graph-stacked {
+  min-height: 400px;
+}/*# sourceMappingURL=style.css.map */

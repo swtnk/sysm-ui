@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SysM - Dashboard</title>
+  <link rel="shortcut icon" href="./assets/icons/favicon/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/vendor/bs5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/vendor/bs5/icons/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./assets/app/css/style.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- LEFT SIDEBAR START -->
+      <aside class="col-2 p-0" id="sidebar-menu--left">
+        <header class="p-0">
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+                <img src="./assets/logos/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                SysM
+              </a>
+            </div>
+          </nav>
+        </header>
+      </aside>
+      <!-- LEFT SIDEBAR END -->
+      <div class="col-10">
+        <div class="row">
+          <!-- HEADER START -->
+          <header class="p-0">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="javascript:void(0);">
+                  <i class="bi bi-list"></i>
+                </a>
+                <div class="d-flex">
+                  <div class="toggle-theme">
+                    <div class="container">
+                      <label class="switch">
+                        <input type="checkbox" id="themeToggleSwitch" checked>
+                        <div class="slider">
+                          <div class="sun"></div>
+                          <div class="moon"></div>
+                          <div class="cloud cloud1"></div>
+                          <div class="cloud cloud2"></div>
+                          <div class="star star1"></div>
+                          <div class="star star2"></div>
+                          <div class="star star3"></div>
+                          <div class="star star4"></div>
+                          <div class="star star5"></div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div>
+                    <a id="setSystemTheme" href="javascript:void(0);" type="button" data-tooltip="Switch to system theme" data-tooltip-location="left"><i class="bi bi-laptop" style="font-size: 1.3rem;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </header>
+          <!-- HEADER END -->
+          <!-- CONTENT START -->
+          <main class="content">
+            <div class="container-fluid my-2">
+              <div>
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="h2 card-title">System Info</h2>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="card-title">Operating System</div>
+                            <div class="data fw-bold" id="os-name"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="card-title">OS Version</div>
+                            <div class="data fw-bold" id="os-version"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="card-title">OS Architecture</div>
+                            <div class="data fw-bold" id="os-architecture"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="card-title">Processors Available</div>
+                            <div class="data fw-bold" id="processors-available"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="h2">CPU</h2>
+                    <hr>
+                    <div class="row">
+                      <div class="col-3 border-right">
+                        <div class="card-title h4 text-center">Instant Monitor</div>
+                        <hr>
+                        <div class="graph-stacked" id="instant-cpu-usage"></div>
+                      </div>
+                      <div class="col-9">
+                        <div class="card-title h4 text-center">CPU Usage History</div>
+                        <hr>
+                        <div class="graph-stacked" id="cpu-usage-history"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="h2">Memory</h2>
+                    <hr>
+                    <div class="row">
+                      <div class="col-6 border-right">
+                        <div class="card-title h4 text-center">Physical Memory</div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-4 border-right"><label for="physical-memory-total" class="h6 fw-light">Total</label> <span class="data d-block fw-bold" id="physical-memory-total"></span></div>
+                          <div class="col-4 border-right"><label for="physical-memory-used" class="h6 fw-light">Used</label> <span class="data d-block fw-bold" id="physical-memory-used"></span></div>
+                          <div class="col-4"><label for="physical-memory-used" class="h6 fw-light">Free</label> <span class="data d-block fw-bold" id="physical-memory-free"></span></div>
+                        </div>
+                        <hr>
+                        <div class="graph-stacked" id="physical-memory-usage"></div>
+                      </div>
+                      <div class="col-6">
+                        <div class="card-title h4 text-center">Swap Space</div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-4 border-right"><label for="swap-space-total" class="h6 fw-light">Total</label> <span class="data d-block fw-bold" id="swap-space-total"></span></div>
+                          <div class="col-4 border-right"><label for="swap-space-used" class="h6 fw-light">Used</label> <span class="data d-block fw-bold" id="swap-space-used"></span></div>
+                          <div class="col-4"><label for="swap-space-used" class="h6 fw-light">Free</label> <span class="data d-block fw-bold" id="swap-space-free"></span></div>
+                        </div>
+                        <hr>
+                        <div class="graph-stacked" id="swap-space-usage"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+          <!-- CONTENT END -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./assets/app/js/app.js"></script>
+  <script src="./assets/vendor/bs5/js/bootstrap.min.js"></script>
+  <script src="./assets/vendor/echarts/echarts.min.js"></script>
+  <script src="./assets/app/js/rest.js"></script>
+  <script src="./assets/app/js/sse.js"></script>
+</body>
+
+</html>

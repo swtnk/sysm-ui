@@ -1,0 +1,23 @@
+@import "partials/theme";
+@import "partials/theme-toggle";
+
+#sidebar {
+    &-menu {
+        &--left {
+            min-height: 100dvh;
+            border-right: 0.5px solid var(--bs-border-color);
+        }
+    }
+}
+
+.border-right {
+    border-right: 1px solid var(--bs-border-color);
+}
+
+.graph {
+    width: 100%;
+    
+    &-stacked {
+        min-height: 400px;
+    }
+}
