@@ -17,7 +17,7 @@
       <!-- LEFT SIDEBAR START -->
       <aside class="col-2 p-0" id="sidebar-menu--left">
         <header class="p-0">
-          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="sidebar">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">
                 <img src="./assets/logos/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
@@ -32,7 +32,7 @@
         <div class="row">
           <!-- HEADER START -->
           <header class="p-0">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="topbar">
               <div class="container-fluid">
                 <a class="navbar-brand" href="javascript:void(0);">
                   <i class="bi bi-list"></i>
@@ -117,12 +117,12 @@
                       <div class="col-3 border-right">
                         <div class="card-title h4 text-center">Instant Monitor</div>
                         <hr>
-                        <div class="graph-stacked" id="instant-cpu-usage"></div>
+                        <div class="graph-cpu" id="instant-cpu-usage"></div>
                       </div>
                       <div class="col-9">
                         <div class="card-title h4 text-center">CPU Usage History</div>
                         <hr>
-                        <div class="graph-stacked" id="cpu-usage-history"></div>
+                        <div class="graph-cpu" id="cpu-usage-history"></div>
                       </div>
                     </div>
                   </div>
@@ -143,7 +143,7 @@
                           <div class="col-4"><label for="physical-memory-used" class="h6 fw-light">Free</label> <span class="data d-block fw-bold" id="physical-memory-free"></span></div>
                         </div>
                         <hr>
-                        <div class="graph-stacked" id="physical-memory-usage"></div>
+                        <div class="graph-memory" id="physical-memory-usage"></div>
                       </div>
                       <div class="col-6">
                         <div class="card-title h4 text-center">Swap Space</div>
@@ -154,7 +154,7 @@
                           <div class="col-4"><label for="swap-space-used" class="h6 fw-light">Free</label> <span class="data d-block fw-bold" id="swap-space-free"></span></div>
                         </div>
                         <hr>
-                        <div class="graph-stacked" id="swap-space-usage"></div>
+                        <div class="graph-memory" id="swap-space-usage"></div>
                       </div>
                     </div>
                   </div>

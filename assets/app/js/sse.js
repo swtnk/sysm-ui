@@ -193,11 +193,13 @@ const cpuInstantOption = {
                 valueAnimation: true,
                 color: 'inherit',
                 formatter: '{value} %',
+                fontSize: 15
             },
             data: [
                 {
                     value: 0,
-                    name: "CPU Usage"
+                    name: "CPU Usage",
+                    fontSize: 10
                 }
             ]
         }

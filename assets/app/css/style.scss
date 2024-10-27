@@ -17,7 +17,11 @@
 .graph {
     width: 100%;
     
-    &-stacked {
+    &-memory {
         min-height: 400px;
+    }
+
+    &-cpu {
+        min-height: 300px;
     }
 }

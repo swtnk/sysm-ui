@@ -204,6 +204,9 @@ body[theme=dark] {
 .graph {
   width: 100%;
 }
-.graph-stacked {
+.graph-memory {
   min-height: 400px;
+}
+.graph-cpu {
+  min-height: 300px;
 }/*# sourceMappingURL=style.css.map */
