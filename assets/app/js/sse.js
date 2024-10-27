@@ -1,4 +1,4 @@
-const memoryEndpoint = "http://localhost:8543/api/v1/sse/memory";
+const memoryEndpoint = `${baseUrl}/api/v1/sse/memory`;
 
 // PHYSICAL MEMORY DATA ELEMENTS
 const physicalMemoryTotalPlaceholder = document.querySelector("#physical-memory-total");

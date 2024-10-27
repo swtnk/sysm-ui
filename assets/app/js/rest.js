@@ -1,4 +1,4 @@
-const systemInfoEndpoint = "http://localhost:8543/api/v1/system";
+const systemInfoEndpoint = `${baseUrl}/api/v1/system`;
 
 const osNamePlaceholder = document.querySelector("#os-name");
 const osVersionPlaceholder = document.querySelector("#os-version");
