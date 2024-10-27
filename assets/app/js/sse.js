@@ -154,6 +154,7 @@ const cpuInstantOption = {
         {
             type: 'gauge',
             axisLine: {
+                distance: 5,
                 lineStyle: {
                     width: 10,
                     color: [
@@ -169,18 +170,18 @@ const cpuInstantOption = {
                 }
             },
             axisTick: {
-                distance: -30,
-                length: 8,
+                distance: 5,
+                length: 5,
                 lineStyle: {
-                    color: '#fff',
+                    color: '#2a67c9',
                     width: 2
                 }
             },
             splitLine: {
-                distance: -30,
-                length: 30,
+                distance: -10,
+                length: 20,
                 lineStyle: {
-                    color: '#fff',
+                    color: '#2a67c9',
                     width: 4
                 }
             },
