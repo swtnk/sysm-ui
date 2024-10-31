@@ -20,12 +20,24 @@
           <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="sidebar">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">
-                <img src="./assets/logos/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <img
+                  src="./assets/logos/logo.webp"
+                  alt="Logo"
+                  class="d-inline-block align-text-top">
                 SysM
               </a>
             </div>
           </nav>
         </header>
+        <div class="sidebar-menu--left-items">
+          <ul class="mt-2">
+            <li class="menu-item label">Home</li>
+            <li class="menu-item active">
+              <a href="/"><i class="icon bi bi-speedometer2"></i> Dashboard</a>
+            </li>
+          </ul>
+        </div>
+        <div class="version"><span class="data" id="version-value"></div>
       </aside>
       <!-- LEFT SIDEBAR END -->
       <div class="col-10">
@@ -37,6 +49,14 @@
                 <a class="navbar-brand" href="javascript:void(0);">
                   <i class="bi bi-list"></i>
                 </a>
+                <div class="col-6">
+                  <div class="input-group">
+                    <input type="text" id="sysm-base-url" class="form-control" placeholder="SysM Base URL (Default: http://localhost:8080)"
+                      aria-label="SysM Base URL" aria-describedby="monitor-button">
+                    <button class="btn btn-outline-secondary" type="button" id="monitor-button"><i
+                        class="bi bi-display"></i></button>
+                  </div>
+                </div>
                 <div class="d-flex">
                   <div class="toggle-theme">
                     <div class="container">
@@ -57,7 +77,9 @@
                     </div>
                   </div>
                   <div>
-                    <a id="setSystemTheme" href="javascript:void(0);" type="button" data-tooltip="Switch to system theme" data-tooltip-location="left"><i class="bi bi-laptop" style="font-size: 1.3rem;"></i></a>
+                    <a id="setSystemTheme" href="javascript:void(0);" type="button"
+                      data-tooltip="Switch to system theme" data-tooltip-location="left"><i class="bi bi-laptop"
+                        style="font-size: 1.3rem;"></i></a>
                   </div>
                 </div>
               </div>
@@ -65,7 +87,12 @@
           </header>
           <!-- HEADER END -->
           <!-- CONTENT START -->
-          <main class="content">
+          <main class="content overflow-y-hidden">
+            <div id="content-backdrop" class="backdrop text-center">
+              <p class="mt-4">
+                <small>Enter SysM instance url and hit monitor button ( <i class="bi bi-display" style="font-size: 1rem;"></i> ) at top input field.</small>
+              </p>
+            </div>
             <div class="container-fluid my-2">
               <div>
                 <div class="card">
@@ -138,9 +165,12 @@
                         <div class="card-title h4 text-center">Physical Memory</div>
                         <hr>
                         <div class="row">
-                          <div class="col-4 border-right"><label for="physical-memory-total" class="h6 fw-light">Total</label> <span class="data d-block fw-bold" id="physical-memory-total"></span></div>
-                          <div class="col-4 border-right"><label for="physical-memory-used" class="h6 fw-light">Used</label> <span class="data d-block fw-bold" id="physical-memory-used"></span></div>
-                          <div class="col-4"><label for="physical-memory-used" class="h6 fw-light">Free</label> <span class="data d-block fw-bold" id="physical-memory-free"></span></div>
+                          <div class="col-4 border-right"><span class="data-label h6 fw-light">Total</span> <span
+                              class="data d-block fw-bold" id="physical-memory-total"></span></div>
+                          <div class="col-4 border-right"><span class="data-label h6 fw-light">Used</span> <span
+                              class="data d-block fw-bold" id="physical-memory-used"></span></div>
+                          <div class="col-4"><span class="data-label h6 fw-light">Free</span> <span
+                              class="data d-block fw-bold" id="physical-memory-free"></span></div>
                         </div>
                         <hr>
                         <div class="graph-memory" id="physical-memory-usage"></div>
@@ -149,9 +179,12 @@
                         <div class="card-title h4 text-center">Swap Space</div>
                         <hr>
                         <div class="row">
-                          <div class="col-4 border-right"><label for="swap-space-total" class="h6 fw-light">Total</label> <span class="data d-block fw-bold" id="swap-space-total"></span></div>
-                          <div class="col-4 border-right"><label for="swap-space-used" class="h6 fw-light">Used</label> <span class="data d-block fw-bold" id="swap-space-used"></span></div>
-                          <div class="col-4"><label for="swap-space-used" class="h6 fw-light">Free</label> <span class="data d-block fw-bold" id="swap-space-free"></span></div>
+                          <div class="col-4 border-right"><span class="data-label h6 fw-light">Total</span> <span
+                              class="data d-block fw-bold" id="swap-space-total"></span></div>
+                          <div class="col-4 border-right"><span class="data-label h6 fw-light">Used</span> <span
+                              class="data d-block fw-bold" id="swap-space-used"></span></div>
+                          <div class="col-4"><span class="data-label h6 fw-light">Free</span> <span
+                              class="data d-block fw-bold" id="swap-space-free"></span></div>
                         </div>
                         <hr>
                         <div class="graph-memory" id="swap-space-usage"></div>
@@ -167,14 +200,27 @@
       </div>
     </div>
   </div>
-  <script>
-    const baseUrl = "http://localhost:8080";
-  </script>
   <script src="./assets/app/js/app.js"></script>
   <script src="./assets/vendor/bs5/js/bootstrap.min.js"></script>
   <script src="./assets/vendor/echarts/echarts.min.js"></script>
   <script src="./assets/app/js/rest.js"></script>
   <script src="./assets/app/js/sse.js"></script>
+  <script>
+    const contentElement = document.querySelector("main.content");
+    const monitorButton = document.querySelector("#monitor-button");
+    const baseUrlField = document.querySelector("#sysm-base-url");
+    const contentBackdrop = document.querySelector("#content-backdrop");
+    if (monitorButton) {
+      monitorButton.addEventListener("click", (event) => {
+        console.log("START MONITORING");
+        const baseUrl = baseUrlField.value || "http://localhost:8080";
+        populateDashboardRest(baseUrl);
+        populateDashboardSse(baseUrl);
+        contentBackdrop.classList.add("d-none");
+        contentElement.classList.remove("overflow-y-hidden");
+      })
+    }
+  </script>
 </body>
 
 </html>
