@@ -114,7 +114,6 @@ const timeFormat = (value) => {
 // SAVE IMAGE NAME FORMAT
 const saveImageNameFormat = (prefix) => {
     const date = new Date();
-    `${prefix}__${baseUrlField.value || defaultBaseUrl}__${timeFormat(new Date())}`;
     const url = (baseUrlField.value || defaultBaseUrl).replace(/:/g, '..').replace(/\//g, '-');
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
