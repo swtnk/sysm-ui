@@ -7,6 +7,7 @@ const DARK_THEME = 'dark';
 const LIGHT_THEME = 'light';
 const _div = document.createElement("div");
 const _span = document.createElement("span");
+const _hr = document.createElement("hr");
 
 // SPINNER ELEMENT START
 const spinner = _div.cloneNode();
@@ -88,3 +89,39 @@ if (themeToggleSwitch) {
 }
 
 // THEME SETTING END
+
+// FORMAT BYTES
+const formatBytes = (bytes) => {
+    const units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    if (bytes === 0) return '0 Bytes';
+
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    const size = bytes / Math.pow(1024, i);
+
+    return `${size.toFixed(2)} ${units[i]}`;
+}
+
+// TIME FORMAT
+const timeFormat = (value) => {
+    const date = new Date(value);
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    
+    return `${hours}:${minutes}:${seconds}`;
+}
+
+// SAVE IMAGE NAME FORMAT
+const saveImageNameFormat = (prefix) => {
+    const date = new Date();
+    `${prefix}__${baseUrlField.value || defaultBaseUrl}__${timeFormat(new Date())}`;
+    const url = (baseUrlField.value || defaultBaseUrl).replace(/:/g, '..').replace(/\//g, '-');
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    const dateTime = `${year}-${month}-${day}-${hours}..${minutes}..${seconds}`;
+    return `${prefix}__${url}__${dateTime}`;
+}

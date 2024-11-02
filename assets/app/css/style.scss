@@ -148,7 +148,7 @@ main {
 }
 
 .graph {
-    width: 100%;
+    min-width: 100%;
 
     &-memory {
         min-height: 400px;
@@ -177,4 +177,26 @@ main {
     backdrop-filter: blur(5px);
     z-index: 9;
     font-size: 1.5rem;
+}
+
+#process-table {
+    tbody {
+        tr {
+            td {
+                font-family: monospace;
+                font-size: 0.8rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+.buttons {
+    &-copy, &-csv, &-excel, &-pdf, &-print {
+        --bs-btn-padding-y: 0.25rem;
+        --bs-btn-padding-x: 0.5rem;
+        --bs-btn-font-size: 0.875rem;
+        --bs-btn-border-radius: var(--bs-border-radius-sm);
+    }
 }

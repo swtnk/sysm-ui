@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SysM - Dashboard</title>
   <link rel="shortcut icon" href="./assets/icons/favicon/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/vendor/datatables/datatable.bundle.min.css">
   <link rel="stylesheet" href="./assets/vendor/bs5/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/vendor/bs5/icons/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./assets/app/css/style.css">
@@ -20,10 +21,7 @@
           <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="sidebar">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">
-                <img
-                  src="./assets/logos/logo.webp"
-                  alt="Logo"
-                  class="d-inline-block align-text-top">
+                <img src="./assets/logos/logo.webp" alt="Logo" class="d-inline-block align-text-top">
                 SysM
               </a>
             </div>
@@ -51,8 +49,9 @@
                 </a>
                 <div class="col-6">
                   <div class="input-group">
-                    <input type="text" id="sysm-base-url" class="form-control" placeholder="SysM Base URL (Default: http://localhost:8080)"
-                      aria-label="SysM Base URL" aria-describedby="monitor-button">
+                    <input type="text" id="sysm-base-url" class="form-control"
+                      placeholder="SysM Base URL (Default: http://localhost:8080)" aria-label="SysM Base URL"
+                      aria-describedby="monitor-button">
                     <button class="btn btn-outline-secondary" type="button" id="monitor-button"><i
                         class="bi bi-display"></i></button>
                   </div>
@@ -90,7 +89,8 @@
           <main class="content overflow-y-hidden">
             <div id="content-backdrop" class="backdrop text-center">
               <p class="mt-4">
-                <small>Enter SysM instance url and hit monitor button ( <i class="bi bi-display" style="font-size: 1rem;"></i> ) at top input field.</small>
+                <small>Enter SysM instance url and hit monitor button ( <i class="bi bi-display"
+                    style="font-size: 1rem;"></i> ) at top input field.</small>
               </p>
             </div>
             <div class="container-fluid my-2">
@@ -99,7 +99,7 @@
                   <div class="card-body">
                     <h2 class="h2 card-title">System Info</h2>
                     <div class="row">
-                      <div class="col-3">
+                      <div class="col-lg-3 col-md-4">
                         <div class="card">
                           <div class="card-body">
                             <div class="card-title">Operating System</div>
@@ -107,7 +107,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3 col-md-4">
                         <div class="card">
                           <div class="card-body">
                             <div class="card-title">OS Version</div>
@@ -115,7 +115,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3 col-md-4">
                         <div class="card">
                           <div class="card-body">
                             <div class="card-title">OS Architecture</div>
@@ -123,7 +123,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3 col-md-4">
                         <div class="card">
                           <div class="card-body">
                             <div class="card-title">Processors Available</div>
@@ -141,12 +141,12 @@
                     <h2 class="h2">CPU</h2>
                     <hr>
                     <div class="row">
-                      <div class="col-3 border-right">
+                      <div class="col-sm-3 col-md-5 border-right">
                         <div class="card-title h4 text-center">Instant Monitor</div>
                         <hr>
                         <div class="graph-cpu" id="instant-cpu-usage"></div>
                       </div>
-                      <div class="col-9">
+                      <div class="col-sm-9 col-md-7">
                         <div class="card-title h4 text-center">CPU Usage History</div>
                         <hr>
                         <div class="graph-cpu" id="cpu-usage-history"></div>
@@ -161,7 +161,7 @@
                     <h2 class="h2">Memory</h2>
                     <hr>
                     <div class="row">
-                      <div class="col-6 border-right">
+                      <div class="col-sm-6 border-right">
                         <div class="card-title h4 text-center">Physical Memory</div>
                         <hr>
                         <div class="row">
@@ -175,7 +175,7 @@
                         <hr>
                         <div class="graph-memory" id="physical-memory-usage"></div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="card-title h4 text-center">Swap Space</div>
                         <hr>
                         <div class="row">
@@ -193,6 +193,30 @@
                   </div>
                 </div>
               </div>
+              <div class="mt-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="h2">Disk Usage</h2>
+                    <hr>
+                    <div class="row" id="disk-usage">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="h2">Running Processes</h2>
+                    <hr>
+                    <div class="row" id="running-processes">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-sm table-striped" id="process-table"></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </main>
           <!-- CONTENT END -->
@@ -200,22 +224,29 @@
       </div>
     </div>
   </div>
-  <script src="./assets/app/js/app.js"></script>
-  <script src="./assets/vendor/bs5/js/bootstrap.min.js"></script>
-  <script src="./assets/vendor/echarts/echarts.min.js"></script>
-  <script src="./assets/app/js/rest.js"></script>
-  <script src="./assets/app/js/sse.js"></script>
   <script>
+    const defaultBaseUrl = "http://localhost:8080";
     const contentElement = document.querySelector("main.content");
     const monitorButton = document.querySelector("#monitor-button");
     const baseUrlField = document.querySelector("#sysm-base-url");
     const contentBackdrop = document.querySelector("#content-backdrop");
+  </script>
+  <script src="./assets/vendor/jq/jquery-3.7.1.min.js"></script>
+  <script src="./assets/vendor/pdfmake/pdfmake.min.js"></script>
+  <script src="./assets/vendor/pdfmake/vfs_fonts.js"></script>
+  <script src="./assets/vendor/datatables/datatable.bundle.min.js"></script>
+  <script src="./assets/vendor/bs5/js/bootstrap.min.js"></script>
+  <script src="./assets/vendor/echarts/echarts.min.js"></script>
+  <script src="./assets/app/js/app.js"></script>
+  <script src="./assets/app/js/rest.js"></script>
+  <script src="./assets/app/js/sse.js"></script>
+  <script>
     if (monitorButton) {
       monitorButton.addEventListener("click", (event) => {
-        console.log("START MONITORING");
-        const baseUrl = baseUrlField.value || "http://localhost:8080";
+        const baseUrl = baseUrlField.value || defaultBaseUrl;
         populateDashboardRest(baseUrl);
         populateDashboardSse(baseUrl);
+        showProcesses(baseUrl);
         contentBackdrop.classList.add("d-none");
         contentElement.classList.remove("overflow-y-hidden");
       })
