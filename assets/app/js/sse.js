@@ -1,8 +1,7 @@
 // PHYSICAL MEMORY DATA ELEMENTS
 let graphs = new Set();
+let eventSources = [];
 const $processTable = $('#process-table');
-
-dataObj = []
 
 const processNameFormatter = (index, row) => {
     const pName = row?.processName;
@@ -58,7 +57,7 @@ const processDataTable = new DataTable("#process-table", {
             title: 'ELAPSED'
         }
     ],
-    data: dataObj
+    data: []
 });
 
 
@@ -122,7 +121,6 @@ const memoryOption = {
         data: [],
         axisLabel: {
             formatter: function (value) {
-                const date = new Date(value);
                 return timeFormat(value);
             }
         }
@@ -181,7 +179,6 @@ const swapOption = {
         data: [],
         axisLabel: {
             formatter: function (value) {
-                const date = new Date(value);
                 return timeFormat(value);
             }
         }
@@ -292,7 +289,6 @@ const cpuHistoryOption = {
         boundaryGap: false,
         axisLabel: {
             formatter: function (value) {
-                const date = new Date(value);
                 return timeFormat(value);
             }
         }
@@ -351,7 +347,6 @@ const populateStorageUsage = (data, index, totalDiskPart, isLast = true) => {
             data: [],
             axisLabel: {
                 formatter: function (value) {
-                    const date = new Date(value);
                     return timeFormat(value);
                 }
             }
@@ -390,6 +385,7 @@ const populateStorageUsage = (data, index, totalDiskPart, isLast = true) => {
     const currentTime = new Date();
 
     if (!storagePlaceholderCreated) {
+        diskUsage.innerHTML = "";
         const colDiv = _div.cloneNode();
         const cardTitle = _div.cloneNode();
         const rowDiv = _div.cloneNode();
@@ -498,16 +494,23 @@ const populateStorageUsage = (data, index, totalDiskPart, isLast = true) => {
 
 const populateDashboardSse = (baseUrl) => {
     const resourceEndpoint = `${baseUrl}/api/v1/sse/resources`;
+    const resourceEvent = "resource-utilization";
 
     // EVENT SOURCE
     const eventSource = new EventSource(`${resourceEndpoint}`);
+
+    eventSources.push({
+        "eventSource": eventSource,
+        "listener": resourceEvent
+    });
+
     physicalMemoryUsageGraph.setOption(memoryOption);
     swapSpaceUsageGraph.setOption(swapOption);
     cpuInstantUsageGraph.setOption(cpuInstantOption);
     cpuHistoryUsageGraph.setOption(cpuHistoryOption);
 
     // RESOURCE UTILIZATION EVENT LISTENER
-    eventSource.addEventListener("resource-utilization", (event) => {
+    eventSource.addEventListener(resourceEvent, (event) => {
         const data = JSON.parse(event.data);
 
         const physicalMemoryTotal = data?.memory?.physical?.total;
@@ -549,7 +552,7 @@ const populateDashboardSse = (baseUrl) => {
         cpuInstantUsageGraph.setOption(cpuInstantOption);
 
         cpuHistoryOption.toolbox.feature.saveAsImage.name = saveImageNameFormat("cpu_history");
-        cpuHistoryUsageGraph.setOption(cpuHistoryOption);
+        cpuHistoryUsageGraph.setOption(cpuHistoryOption, true);
 
         if (memoryOption.xAxis.data.length > 100) {
             memoryOption.xAxis.data.shift();
@@ -581,11 +584,17 @@ const populateDashboardSse = (baseUrl) => {
 
 const showProcesses = (baseUrl) => {
     const processesEndpoint = `${baseUrl}/api/v1/sse/processes`;
+    const resourceEvent = "processes";
 
     // EVENT SOURCE
     const eventSource = new EventSource(`${processesEndpoint}`);
 
-    eventSource.addEventListener("processes", (event) => {
+    eventSources.push({
+        "eventSource": eventSource,
+        "listener": resourceEvent
+    });
+
+    eventSource.addEventListener(resourceEvent, (event) => {
         const data = JSON.parse(event.data);
         processDataTable.clear();
         processDataTable.rows.add(data?.processes);
